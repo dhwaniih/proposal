@@ -1,194 +1,204 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For Aryan 💌</title>
+<meta charset="UTF-8">
+<title>Open Me ❤️</title>
+
+<!-- Pinterest Luxe Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  margin:0;
+  background:#fff0f3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  flex-direction:column;
+  overflow:hidden;
+  font-family:'Playfair Display', serif;
 }
 
-/* ENVELOPE */
-.wrapper {
-  position: relative;
-  width: 250px;
-  height: 180px;
-  cursor: pointer;
-}
-
+/* Envelope */
 .envelope {
-  width: 100%;
-  height: 120px;
-  background: #ff4b91;
-  position: absolute;
-  bottom: 0;
-  border-radius: 0 0 10px 10px;
+  position:relative;
+  width:260px;
+  height:180px;
+  background:#c1121f;
+  border-radius:6px;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
 }
 
 .flap {
-  position: absolute;
-  top: 0;
-  width: 0;
-  height: 0;
-  border-left: 125px solid transparent;
-  border-right: 125px solid transparent;
-  border-bottom: 90px solid #ff6fa5;
-  transform-origin: top;
-  transition: transform 0.8s ease;
-}
-
-.card-inside {
-  position: absolute;
-  width: 220px;
-  height: 140px;
-  background: white;
-  top: 20px;
-  left: 15px;
-  border-radius: 10px;
-  text-align: center;
-  line-height: 140px;
-  color: #ff4b91;
-  font-weight: bold;
-  transform: translateY(60px);
-  transition: transform 0.8s ease;
+  position:absolute;
+  top:0;
+  width:100%;
+  height:100%;
+  background:#a4161a;
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  transform-origin:top;
+  transition:transform 1s ease;
 }
 
 .open .flap {
-  transform: rotateX(180deg);
+  transform:rotateX(180deg);
 }
 
-.open .card-inside {
-  transform: translateY(-140px);
+.open-btn {
+  color:white;
+  font-size:18px;
+  letter-spacing:1px;
 }
 
-/* QUESTION CARD */
-.question {
-  display: none;
-  position: absolute;
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
-  text-align: center;
-  color: #ff4b91;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+/* Card */
+.card {
+  position:absolute;
+  width:220px;
+  height:140px;
+  background:white;
+  border-radius:8px;
+  top:100px;
+  opacity:0;
+  padding:15px;
+  text-align:center;
+  transition:all 1.2s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card h1 {
+  font-family:'Great Vibes', cursive;
+  font-size:30px;
+  color:#c1121f;
+  line-height:1.3;
+}
+
+.open .card {
+  top:-120px;
+  opacity:1;
+}
+
+/* Buttons */
+.buttons {
+  margin-top:30px;
+  display:none;
 }
 
 button {
-  padding: 12px 25px;
-  font-size: 16px;
-  border-radius: 25px;
-  border: none;
-  margin: 15px;
-  cursor: pointer;
-  background: #ff4b91;
-  color: white;
-  transition: transform 0.2s;
+  padding:12px 28px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  background:#c1121f;
+  color:white;
+  transition:0.3s;
+  font-family:'Playfair Display';
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform:scale(1.1);
 }
 
+/* Celebration */
 .celebration {
-  text-align: center;
-  color: white;
+  display:none;
+  text-align:center;
+  position:absolute;
 }
 
-.celebration img {
-  width: 300px;
-  border-radius: 20px;
-  margin-top: 20px;
+.celebration h2 {
+  font-family:'Great Vibes';
+  font-size:40px;
+  color:#c1121f;
+}
+
+.friends {
+  width:220px;
+  margin-top:20px;
+}
+
+/* Falling Hearts */
+.heart {
+  position:absolute;
+  color:#ff4d6d;
+  font-size:20px;
+  animation:fall 4s linear infinite;
+}
+
+@keyframes fall {
+  0% {transform:translateY(-10vh) rotate(0deg);}
+  100% {transform:translateY(110vh) rotate(360deg);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrapper" id="envelope" onclick="openEnvelope()">
+<div class="envelope" onclick="openEnvelope()">
   <div class="flap"></div>
-  <div class="envelope"></div>
-  <div class="card-inside">Open Me 💌</div>
+  <div class="open-btn">Open Me ❤️</div>
+  <div class="card">
+    <h1>Aryan Singh,<br>will you marry me in 365 days?</h1>
+  </div>
 </div>
 
-<div class="question" id="questionBox">
-  <h2>Aryan, will you marry me in 365 days? 💍</h2>
-  <button onclick="celebrate()">Yes 💖</button>
-  <button onclick="celebrate()">A million times yes 💞</button>
+<div class="buttons">
+  <button onclick="celebrate()">Yes</button>
+  <button onclick="celebrate()">A Million Times Yes</button>
 </div>
+
+<div class="celebration">
+  <h2>Yayyyyyy! Countdown beginssss wohooooooo 💍</h2>
+  <img src="friends.gif" class="friends">
+</div>
+
+<audio id="music" src="music.mp3"></audio>
 
 <script>
-
 function openEnvelope() {
-  document.getElementById("envelope").classList.add("open");
+  document.querySelector('.envelope').classList.add('open');
+  document.getElementById("music").play();
 
-  setTimeout(() => {
-    document.getElementById("envelope").style.display = "none";
-    document.getElementById("questionBox").style.display = "block";
-  }, 900);
+  setTimeout(()=>{
+    document.querySelector('.buttons').style.display="block";
+    createHeartsFromEnvelope();
+  },1500);
 }
 
 function celebrate() {
-  document.body.innerHTML = `
-    <div class="celebration">
-      <h1>Yayyyyyy! Countdown beginssss wohooooooo 💍</h1>
-      <img src="friends.gif">
-    </div>
-  `;
-  startHeartRain();
-  startBalloons();
+  document.querySelector('.envelope').style.display="none";
+  document.querySelector('.buttons').style.display="none";
+  document.querySelector('.celebration').style.display="block";
+  fallingHearts();
 }
 
-/* SCATTERED HEART RAIN */
-function startHeartRain() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.style.position = "absolute";
-    heart.style.top = "-20px";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+function createHeartsFromEnvelope(){
+  for(let i=0;i<15;i++){
+    let heart=document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.classList.add("heart");
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*2)+"s";
     document.body.appendChild(heart);
-
-    let fall = setInterval(() => {
-      heart.style.top = parseInt(heart.style.top) + (Math.random() * 5 + 2) + "px";
-      heart.style.left = parseInt(heart.style.left) + (Math.random() * 4 - 2) + "px";
-
-      if (parseInt(heart.style.top) > window.innerHeight) {
-        heart.remove();
-        clearInterval(fall);
-      }
-    }, 20);
-  }, 150);
+  }
 }
 
-/* FLOATING HEART BALLOONS */
-function startBalloons() {
-  setInterval(() => {
-    let balloon = document.createElement("div");
-    balloon.innerHTML = "💗";
-    balloon.style.position = "absolute";
-    balloon.style.bottom = "0px";
-    balloon.style.left = Math.random() * window.innerWidth + "px";
-    balloon.style.fontSize = "30px";
-    document.body.appendChild(balloon);
-
-    let rise = setInterval(() => {
-      balloon.style.bottom = parseInt(balloon.style.bottom) + 3 + "px";
-      if (parseInt(balloon.style.bottom) > window.innerHeight) {
-        balloon.remove();
-        clearInterval(rise);
-      }
-    }, 20);
-  }, 500);
+function fallingHearts(){
+  setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.classList.add("heart");
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+  },300);
 }
-
 </script>
 
 </body>
