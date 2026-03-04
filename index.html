@@ -8,24 +8,24 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   overflow: hidden;
 }
 
 /* ENVELOPE */
-.envelope-wrapper {
+.wrapper {
   position: relative;
-  width: 200px;
-  height: 140px;
+  width: 250px;
+  height: 180px;
   cursor: pointer;
 }
 
 .envelope {
   width: 100%;
-  height: 100%;
+  height: 120px;
   background: #ff4b91;
   position: absolute;
   bottom: 0;
@@ -33,50 +33,51 @@ body {
 }
 
 .flap {
-  width: 0;
-  height: 0;
-  border-left: 100px solid transparent;
-  border-right: 100px solid transparent;
-  border-bottom: 70px solid #ff6fa5;
   position: absolute;
   top: 0;
-  transition: transform 0.6s ease;
+  width: 0;
+  height: 0;
+  border-left: 125px solid transparent;
+  border-right: 125px solid transparent;
+  border-bottom: 90px solid #ff6fa5;
   transform-origin: top;
+  transition: transform 0.8s ease;
 }
 
-.card {
+.card-inside {
   position: absolute;
-  width: 180px;
-  height: 120px;
+  width: 220px;
+  height: 140px;
   background: white;
-  top: 10px;
-  left: 10px;
+  top: 20px;
+  left: 15px;
   border-radius: 10px;
   text-align: center;
-  padding: 15px;
-  box-sizing: border-box;
-  transform: translateY(40px);
-  transition: transform 0.6s ease;
+  line-height: 140px;
   color: #ff4b91;
+  font-weight: bold;
+  transform: translateY(60px);
+  transition: transform 0.8s ease;
 }
 
 .open .flap {
   transform: rotateX(180deg);
 }
 
-.open .card {
-  transform: translateY(-120px);
+.open .card-inside {
+  transform: translateY(-140px);
 }
 
 /* QUESTION CARD */
-.question-card {
+.question {
   display: none;
+  position: absolute;
   background: white;
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   color: #ff4b91;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
 }
 
 button {
@@ -86,21 +87,13 @@ button {
   border: none;
   margin: 15px;
   cursor: pointer;
-}
-
-#yesBtn {
-  background-color: #ff4b91;
+  background: #ff4b91;
   color: white;
+  transition: transform 0.2s;
 }
 
-#noBtn {
-  background-color: lightgray;
-  position: absolute;
-}
-
-.message {
-  margin-top: 10px;
-  font-size: 14px;
+button:hover {
+  transform: scale(1.1);
 }
 
 .celebration {
@@ -118,85 +111,68 @@ button {
 
 <body>
 
-<div class="envelope-wrapper" onclick="openEnvelope()" id="envelopeWrap">
+<div class="wrapper" id="envelope" onclick="openEnvelope()">
   <div class="flap"></div>
   <div class="envelope"></div>
-  <div class="card">Open Me 💌</div>
+  <div class="card-inside">Open Me 💌</div>
 </div>
 
-<div class="question-card" id="questionCard">
+<div class="question" id="questionBox">
   <h2>Aryan, will you marry me in 365 days? 💍</h2>
-  <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-  <button id="noBtn" onclick="noClicked()">No 🙈</button>
-  <div class="message" id="noMessage"></div>
+  <button onclick="celebrate()">Yes 💖</button>
+  <button onclick="celebrate()">A million times yes 💞</button>
 </div>
 
 <script>
 
-let noClickCount = 0;
-
 function openEnvelope() {
-  document.getElementById("envelopeWrap").classList.add("open");
+  document.getElementById("envelope").classList.add("open");
 
   setTimeout(() => {
-    document.getElementById("envelopeWrap").style.display = "none";
-    document.getElementById("questionCard").style.display = "block";
-  }, 700);
+    document.getElementById("envelope").style.display = "none";
+    document.getElementById("questionBox").style.display = "block";
+  }, 900);
 }
 
-function noClicked() {
-  noClickCount++;
-  const msg = document.getElementById("noMessage");
-  const noBtn = document.getElementById("noBtn");
-
-  if (noClickCount === 1) {
-    msg.innerHTML = "Not an option 😌";
-  } else if (noClickCount === 2) {
-    msg.innerHTML = "Think again 👀";
-  } else {
-    msg.innerHTML = "You know the right answer 💕";
-  }
-
-  // make No run away after teasing
-  noBtn.style.left = Math.random() * 200 + "px";
-  noBtn.style.top = Math.random() * 100 + "px";
-}
-
-function yesClicked() {
+function celebrate() {
   document.body.innerHTML = `
     <div class="celebration">
       <h1>Yayyyyyy! Countdown beginssss wohooooooo 💍</h1>
       <img src="friends.gif">
     </div>
   `;
-  startHearts();
+  startHeartRain();
   startBalloons();
 }
 
-function startHearts() {
-  for (let i = 0; i < 250; i++) {
+/* SCATTERED HEART RAIN */
+function startHeartRain() {
+  setInterval(() => {
     let heart = document.createElement("div");
     heart.innerHTML = "💖";
     heart.style.position = "absolute";
-    heart.style.left = Math.random() * window.innerWidth + "px";
     heart.style.top = "-20px";
-    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
     document.body.appendChild(heart);
 
     let fall = setInterval(() => {
-      heart.style.top = parseInt(heart.style.top) + 4 + "px";
+      heart.style.top = parseInt(heart.style.top) + (Math.random() * 5 + 2) + "px";
+      heart.style.left = parseInt(heart.style.left) + (Math.random() * 4 - 2) + "px";
+
       if (parseInt(heart.style.top) > window.innerHeight) {
         heart.remove();
         clearInterval(fall);
       }
     }, 20);
-  }
+  }, 150);
 }
 
+/* FLOATING HEART BALLOONS */
 function startBalloons() {
   setInterval(() => {
     let balloon = document.createElement("div");
-    balloon.innerHTML = "🎈";
+    balloon.innerHTML = "💗";
     balloon.style.position = "absolute";
     balloon.style.bottom = "0px";
     balloon.style.left = Math.random() * window.innerWidth + "px";
