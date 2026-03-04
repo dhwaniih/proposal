@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Aryan ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 18%;
+}
+
+h1 {
+  font-size: 32px;
+  padding: 0 20px;
+}
+
+button {
+  padding: 14px 30px;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  margin: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yesBtn {
+  background-color: white;
+  color: #ff4b91;
+  font-weight: bold;
+}
+
+#yesBtn:hover {
+  transform: scale(1.1);
+}
+
+#noBtn {
+  background-color: rgba(255,255,255,0.7);
+  position: absolute;
+}
+
+.celebration {
+  margin-top: 8%;
+}
+
+.celebration img {
+  width: 320px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.countdown-text {
+  font-size: 28px;
+  margin-top: 25px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Aryan, will you marry me in 365 days? 💍</h1>
+  <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+  <button id="noBtn">No 🙈</button>
+</div>
+
+<script>
+
+// YES CLICKED
+function yesClicked() {
+  document.body.innerHTML = `
+    <div class="celebration">
+      <img src="friends.gif" alt="Celebration">
+      <div class="countdown-text">
+        Countdown begins… with love 💍❤️
+      </div>
+    </div>
+  `;
+  startConfetti();
+}
+
+// MOVING NO BUTTON
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", function() {
+  const x = Math.random() * (window.innerWidth - 150);
+  const y = Math.random() * (window.innerHeight - 80);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+// CONFETTI
+function startConfetti() {
+  const colors = ["#ff4b91", "#ffffff", "#ffd700"];
+
+  for (let i = 0; i < 250; i++) {
+    let confetti = document.createElement("div");
+    confetti.style.width = "8px";
+    confetti.style.height = "8px";
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.position = "absolute";
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.top = "-10px";
+    confetti.style.borderRadius = "50%";
+    document.body.appendChild(confetti);
+
+    let fall = setInterval(() => {
+      confetti.style.top = parseInt(confetti.style.top) + 5 + "px";
+      if (parseInt(confetti.style.top) > window.innerHeight) {
+        confetti.remove();
+        clearInterval(fall);
+      }
+    }, 20);
+  }
+}
+
+</script>
+
+</body>
+</html>
